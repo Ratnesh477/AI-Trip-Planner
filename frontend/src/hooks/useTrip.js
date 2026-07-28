@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { safeJsonParse } from '../utils/jsonRepair';
 import { validateTripSchema, getDemoTripData } from '../utils/schema';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 const LOCAL_STORAGE_KEY = 'odyssey_saved_trips';
 
 export default function useTrip() {
