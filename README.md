@@ -50,9 +50,9 @@ The application is heavily designed around **UX resilience**—specifically mana
 Make sure you have [Node.js](https://nodejs.org/) installed (recommended v18+).
 
 ### 1. Installation
-Run the command below in the project root directory. This will install all dependencies for the root, backend proxy, and React frontend concurrently:
+Run the command below in the project root directory. This will automatically install all dependencies for the root, backend proxy, and React frontend concurrently:
 ```bash
-npm run install:all
+npm install
 ```
 
 ### 2. Configure API Credentials (Optional)
@@ -67,7 +67,7 @@ Choose one of two ways to configure it:
 ### 3. Run Development Servers
 Start both the Express API server (port 3000) and Vite development client (port 5173) concurrently:
 ```bash
-npm run dev
+npm start
 ```
 Open [http://localhost:5173/](http://localhost:5173/) in your browser.
 
