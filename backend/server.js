@@ -182,6 +182,10 @@ Please update the itinerary according to the user request. Return the entire mod
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Odyssey Backend Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Odyssey Backend Server running on port ${PORT}`);
+  });
+}
+
+export default app;
