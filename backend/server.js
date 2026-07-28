@@ -56,22 +56,31 @@ const tripSchema = {
   required: ["tripTitle", "tripSummary", "destination", "durationDays", "packingSuggestions", "itinerary"]
 };
 
+// You can paste a default API key here as a fallback (optional)
+// WARNING: Avoid committing real keys to public repositories.
+const DEFAULT_API_KEY = ''; 
+
 // Helper function to initialize Gemini client
 const getGeminiClient = (req, res) => {
-  const apiKey = req.headers['x-api-key'] || process.env.GEMINI_API_KEY;
+  const apiKey = req.headers['x-api-key'] || process.env.GEMINI_API_KEY || DEFAULT_API_KEY;
   if (!apiKey) {
     res.status(401).json({
       error: "API Key Missing",
-      message: "Please set GEMINI_API_KEY in your backend .env file or enter it in the app settings in the top-right header."
+      message: "Please set GEMINI_API_KEY in your backend .env file, specify DEFAULT_API_KEY in server.js, or enter it in the app settings in the top-right header."
     });
     return null;
   }
   return new GoogleGenerativeAI(apiKey);
 };
 
+// Root endpoint welcome message (prevents "Cannot GET /" on Render)
+app.get('/', (req, res) => {
+  res.send('🌌 Odyssey Trip Planner Backend Service is running successfully!');
+});
+
 // Test / Health check route
 app.get('/api/health', (req, res) => {
-  const hasKey = !!process.env.GEMINI_API_KEY;
+  const hasKey = !!(process.env.GEMINI_API_KEY || DEFAULT_API_KEY);
   res.json({ status: "healthy", serverApiKeyLoaded: hasKey });
 });
 
