@@ -58,7 +58,7 @@ const tripSchema = {
 
 // You can paste a default API key here as a fallback (optional)
 // WARNING: Avoid committing real keys to public repositories.
-const DEFAULT_API_KEY = ''; 
+const DEFAULT_API_KEY = process.env.DEFAULT_API_KEY || ''; // Use environment variable or leave empty
 
 // Helper function to initialize Gemini client
 const getGeminiClient = (req, res) => {
@@ -107,7 +107,7 @@ app.post('/api/generate', async (req, res) => {
 
     const response = await model.generateContent(prompt);
     const text = response.response.text();
-    
+
     // Attempt parsing. If it parses correctly, return it.
     // If not, we still send the text back, and our frontend error handling will process it.
     try {
